@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Desserts Menu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="menu">
+    <section class="products">
+      <h1>Desserts</h1>
+      <div class="cards" id="product-list">
+        <!-- Cards will be injected here by JS -->
+      </div>
+    </section>
+    <aside class="cart">
+      <h2>Your Cart (<span id="cart-count">0</span>)</h2>
+      <div id="cart-items" class="cart-items empty">
+        <img src="assets/images/empty-cart.png" alt="Empty cart" />
+        <p>Your added items will appear here</p>
+      </div>
+      <div id="cart-summary" class="hidden">
+        <p class="total">Order Total: <strong id="cart-total">$0.00</strong></p>
+        <button class="confirm-btn">Confirm Order</button>
+      </div>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
