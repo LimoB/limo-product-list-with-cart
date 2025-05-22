@@ -22,6 +22,7 @@ async function loadProducts() {
   } catch (error) {
     console.error("Failed to load products:", error);
   }
+  //  console.log(products)
 }
 
 function renderProducts() {
@@ -50,6 +51,8 @@ function renderProducts() {
   });
 }
 
+//this function
+
 function updateCartUI() {
   const totalItems = Object.values(cart).reduce((a, b) => a + b.quantity, 0);
   cartCount.textContent = totalItems;
@@ -57,7 +60,7 @@ function updateCartUI() {
   if (totalItems === 0) {
     cartItems.classList.add("empty");
     cartItems.innerHTML = `
-      <img src="assets/images/empty-cart.png" alt="Empty cart" />
+      <img src="assets/images/illustration-empty-cart.svg" alt="Empty cart" />
       <p>Your added items will appear here</p>
     `;
     cartSummary.classList.add("hidden");
@@ -73,15 +76,34 @@ function updateCartUI() {
     total += subtotal;
 
     const itemEl = document.createElement("div");
+    itemEl.classList.add("cart-item");
     itemEl.innerHTML = `
-      <p>${item.title} <strong>${item.quantity}x</strong> - $${subtotal.toFixed(2)}</p>
-    `;
+    <div class="item-info">
+      <div class="item-title">${item.title}</div>
+      <div class="item-meta">
+        <span>${item.quantity}x</span>
+        <span>@$${item.price.toFixed(2)}</span>
+        <span>$${subtotal.toFixed(2)}</span>
+      </div>
+    </div>
+
+    <button class="remove-item" onclick="removeItem('${id}')">
+  <img src="assets/images/icon-remove-item.svg" alt="Remove" />
+</button>
+
+  `;
     cartItems.appendChild(itemEl);
   });
 
   cartTotal.textContent = `$${total.toFixed(2)}`;
   cartSummary.classList.remove("hidden");
+
 }
+
+
+
+
+//ends
 
 function addToCart(id) {
   if (!cart[id]) {
@@ -107,6 +129,11 @@ function addToCart(id) {
   updateCartUI();
 }
 
+
+
+
+
+
 function increase(id) {
   cart[id].quantity++;
   document.getElementById(`qty-${id}`).textContent = cart[id].quantity;
@@ -121,6 +148,9 @@ function increase(id) {
 
   updateCartUI();
 }
+
+
+
 
 function decrease(id) {
   cart[id].quantity--;
@@ -146,4 +176,80 @@ function decrease(id) {
   updateCartUI();
 }
 
+
+// function removeItem(id) {
+//   delete cart[id];
+//   updateCartUI();
+
+//   const addDiv = document.getElementById(`add-${id}`);
+//   if (addDiv) {
+//     addDiv.innerHTML = `
+//       <button class="add-button" onclick="addToCart('${id}')">
+//         <img src="assets/images/icon-add-to-cart.svg" alt="Add to Cart" />
+//         Add to Cart
+//       </button>
+//     `;
+//   }
+// }
+
+
+function removeItem(id) {
+  delete cart[id];
+  const addDiv = document.getElementById(`add-${id}`);
+  addDiv.innerHTML = `
+    <button class="add-button" onclick="addToCart('${id}')">
+      <img src="assets/images/icon-add-to-cart.svg" alt="Add to Cart" />
+      Add to Cart
+    </button>
+  `;
+  updateCartUI();
+}
+
 loadProducts();
+
+
+
+
+function confirmOrder() {
+  const modal = document.getElementById("confirmationModal");
+  const confirmationItems = document.getElementById("confirmationItems");
+  const confirmationTotal = document.getElementById("confirmationTotal");
+
+  confirmationItems.innerHTML = "";
+  let total = 0;
+
+  Object.values(cart).forEach(item => {
+    const subtotal = item.price * item.quantity;
+    total += subtotal;
+
+    const itemEl = document.createElement("div");
+    itemEl.classList.add("cart-item");
+    itemEl.innerHTML = `
+      <div class="item-info">
+        <div class="item-title">${item.title}</div>
+        <div class="item-meta">
+          <span>${item.quantity}x</span>
+          <span>@$${item.price.toFixed(2)}</span>
+        </div>
+      </div>
+      <div class="item-subtotal">$${subtotal.toFixed(2)}</div>
+    `;
+    confirmationItems.appendChild(itemEl);
+  });
+
+  confirmationTotal.textContent = `$${total.toFixed(2)}`;
+  modal.classList.remove("hidden");
+}
+
+function startNewOrder() {
+  // Clear cart object
+  for (const id in cart) {
+    removeItem(id);
+  }
+
+  // Hide modal
+  const modal = document.getElementById("confirmationModal");
+  modal.classList.add("hidden");
+}
+document.querySelector(".confirm-btn").addEventListener("click", confirmOrder);
+document.querySelector(".start-new-btn").addEventListener("click", startNewOrder);

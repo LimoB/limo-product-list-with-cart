@@ -44,20 +44,18 @@ body {
   border-top-right-radius: 16px;
 }
 
-/* Container for add-to-cart area with fixed width */
 .add-to-cart-container {
   position: absolute;
   bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-  width: 160px; /* fixed width for consistency */
+  width: 160px;
   transition: all 0.3s ease;
-  box-sizing: border-box; /* include padding and border inside width */
+  box-sizing: border-box;
 }
 
-/* Add button and counter share these styles */
-.add-button, 
+.add-button,
 .counter,
 .in-cart {
   height: 40px;
@@ -73,23 +71,20 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border: 2px solid #f97316;
   padding: 0 16px;
-  box-sizing: border-box; /* ensures padding/border inside width */
-  width: 100%; /* fill the fixed container */
+  box-sizing: border-box;
+  width: 100%;
 }
 
-/* Specific styling for add-button */
 .add-button {
   background: white;
   color: #f97316;
 }
 
-/* Icon size inside add-button */
 .add-button img {
   width: 16px;
   height: 16px;
 }
 
-/* In-cart label style */
 .in-cart {
   position: relative;
   background: white;
@@ -97,11 +92,10 @@ body {
   cursor: default;
 }
 
-/* Counter inside in-cart button */
 .in-cart .counter {
   position: absolute;
   inset: 0;
-  background: #a0522d; /* brown */
+  background: #a0522d;
   color: white;
   display: flex;
   align-items: center;
@@ -116,18 +110,15 @@ body {
   box-sizing: border-box;
 }
 
-/* Show counter on hover */
 .in-cart:hover .counter {
   opacity: 1;
   pointer-events: all;
 }
 
-/* Hide add-button when item is already in cart (JS toggles .in-cart class) */
 .add-button.in-cart {
   display: none;
 }
 
-/* Counter button styles */
 .counter button {
   background: none;
   border: none;
@@ -137,7 +128,6 @@ body {
   align-items: center;
 }
 
-/* Counter button icons */
 .counter button img {
   width: 14px;
   height: 14px;
@@ -178,6 +168,9 @@ body {
 .cart h2 {
   font-size: 18px;
   color: #d84315;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cart-items img {
@@ -194,6 +187,23 @@ body {
 .cart-items:not(.empty) p {
   display: none;
 }
+
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+.cart-total-row .total-amount {
+  font-weight: bold;
+}
+
+
+
+
+
 
 .hidden {
   display: none;
@@ -214,4 +224,246 @@ body {
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+}
+
+.order-label {
+  font-size: 14px;
+  color: #999;
+  margin-top: 24px;
+  margin-bottom: 4px;
+}
+
+.total-amount {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 16px;
+}
+
+.carbon-neutral {
+  background-color: #fdf9f6;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  gap: 8px;
+}
+
+
+.carbon-neutral-box {
+  display: flex;
+  align-items: center;
+  background: #f2f2f2;
+  padding: 10px;
+  border-radius: 10px;
+  gap: 10px;
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+.carbon-neutral-box img {
+  width: 20px;
+  height: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.item-meta {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  gap: 15px;
+  /* small gap between items */
+  margin-top: 4px;
+  flex-wrap: wrap;
+  /* prevent overflow */
+  justify-content: flex-start;
+  /* align to left */
+}
+
+
+/* i will be back */
+.item-meta span {
+  min-width: 50px;
+  /* optional, for alignment */
+  text-align: left;
+}
+
+.item-meta span:first-child {
+  color: #e74c3c;
+  /* a nice red color */
+  font-weight: bold;
+  /* optional, to make it stand out more */
+}
+
+
+
+
+.remove-item {
+  background: white;
+  border: none;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  padding: 0;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.remove-item img {
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
+.remove-item:hover {
+  background: #f0f0f0;
+}
+
+
+
+#cart-count {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
+
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  /* text-align: center; */
+text-align: left;
+  margin-bottom: 24px;
+}
+
+.modal-header .check-icon {
+  width: 32px;
+  margin-bottom: 12px;
+}
+
+.modal-header h2 {
+  font-size: 22px;
+  color: #3e2723;
+  margin: 0;
+}
+
+.modal-header .subtitle {
+  font-size: 14px;
+  color: #888;
+}
+
+.modal-body {
+  background: #fcf7f2;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.modal-body .cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.modal-body .item-info {
+  flex: 1;
+}
+
+.modal-body .item-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.modal-body .item-meta {
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.item-subtotal {
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modal-total-amount {
+  font-size: 20px;
+  color: #000;
+}
+
+.start-new-btn {
+  background: #d84315;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
 }
