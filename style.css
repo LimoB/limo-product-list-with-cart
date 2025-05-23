@@ -1,18 +1,33 @@
+/* GLOBAL BOX SIZING FIX */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+
 body {
   font-family: Arial, sans-serif;
   background: #fdf9f6;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .menu {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 40px;
   padding: 40px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .products {
-  flex: 2;
+  flex-grow: 1;
+  max-width: 800px;
 }
 
 .cards {
@@ -20,6 +35,16 @@ body {
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
+
+.cart {
+  width: 280px;
+  flex-shrink: 0;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.05);
+}
+
 
 
 
@@ -471,4 +496,39 @@ text-align: left;
   font-size: 15px;
   cursor: pointer;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .products {
+    max-width: 100%;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cart {
+    width: 100%;
+    margin-top: 30px;
+    box-shadow: none;
+    border: 1px solid #eee;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
 }
